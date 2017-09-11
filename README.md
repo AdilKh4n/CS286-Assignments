@@ -7,14 +7,14 @@ Baum-Welch re-estimation algorithm.
 a) Obtain an English plaintext message consisting of 50,000 plaintext
 characters, where the characters consist only of lower case a through z
 (i.e., remove all punctuation and spaces, and convert all upper case
-to lower case). <i>Encrypt</i> this plaintext using a Caesar’s cipher.
+to lower case). <b>Encrypt</b> this plaintext using a Caesar’s cipher.
 
 b) Train an HMM with N = 2 and M = 26 on your ciphetext from
 part a). From the resulting B matrix, determine the ciphertext
 letters that correspond to consonants and those that correspond to
 vowels.
 
-c) Generate a digraph frequency matrix A for English text, where aij is
+c) Generate a <b>digraph</b> frequency matrix A for English text, where aij is
 the count of the number of times that letter i is followed by letter j.
 Note that a is letter 0, b is letter 1, c is letter 2, and so on. This
 matrix must be based on 1,000,000 characters where, as above, only
