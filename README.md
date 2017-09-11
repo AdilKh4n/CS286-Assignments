@@ -7,7 +7,7 @@ Baum-Welch re-estimation algorithm.
 a) Obtain an English plaintext message consisting of 50,000 plaintext
 characters, where the characters consist only of lower case a through z
 (i.e., remove all punctuation and spaces, and convert all upper case
-to lower case). Encrypt this plaintext using a Caesar’s cipher.
+to lower case). <i>Encrypt</i> this plaintext using a Caesar’s cipher.
 
 b) Train an HMM with N = 2 and M = 26 on your ciphetext from
 part a). From the resulting B matrix, determine the ciphertext
