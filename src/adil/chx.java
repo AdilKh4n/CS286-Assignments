@@ -6,37 +6,41 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Random;
 import java.util.Stack;
 
 public class chx {
 	
-	public String reverseWords(String s,int K) {
-		int lev = s.lastIndexOf("\t");
-		System.out.println(lev);
-        String[] arr = s.split("-");
-        StringBuilder sb = new StringBuilder();
-       
-        for(String x:arr)
-        {
-        	sb.append(x);
-        }
-        
-       
-        for(int i= sb.length(); i>0 ; i=i-K)
-        {
-        	if(i!=0 && i!=sb.length())
-        	sb.insert(i,"-");
-        }
-        return sb.toString().toUpperCase();
-	}
-     
-        
+	Double init = 1.0/26;
+      
+	
 public static void main(String[] args)
 	{
-		chx c = new chx();
-		int arr[]= {1,2,3,8,5,4};
-		String x = c.reverseWords("dir\n\tsubdir\n\t\tfile1.ext",5);
-	System.out.println(x);
-	
+		Random rm = new Random();
+		System.out.println(rm.nextInt(100) + 1);
+		double B[][]= new double[26][26];  
+		
+		double pi[] = new double[26];
+		double rowsum = 0.0;
+		
+		for(int i=0; i < 26;i++)
+		{
+			pi[i]= rm.nextInt(100) + 1;
+			rowsum = rowsum + pi[i];
+		}
+		
+		Double sum = 0.0;
+		System.out.println("New B matrix formed after dividing by rowsum");
+	//	System.out.println(" " + hm.keySet());
+		for (int i =0; i<26;i++)
+		{
+				System.out.print("  " + pi[i] / rowsum);
+				sum = sum + pi[i] / rowsum;
+				pi[i] =  pi[i] / rowsum;
+		}
+			System.out.print(" Sum " + sum);
+			//System.out.print("\n");
+			//sum = 0.0;
+		
 	 }
 }

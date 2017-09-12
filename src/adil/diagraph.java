@@ -11,6 +11,7 @@ public class diagraph {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		double diagraph[][]=new double[26][26];
 		int maxchar = 0;
 	
 		int maincount = 0;
@@ -83,7 +84,8 @@ public class diagraph {
 		
 		//System.out.println(hm.get(mes[4])))
 		
-		int diagraph[][] = new int[26][26];
+		//double diagraph[][] = new double[26][26];
+		
 		
 		for(int i=0; i<mes.length-1;i++)
 		{
@@ -113,7 +115,7 @@ public class diagraph {
 			System.out.print("\n");
 		}
 		
-		int rowsum[] = new int[26];
+		double rowsum[] = new double[26];
 		
 		for (int i =0; i<26;i++)
 		{
@@ -129,15 +131,17 @@ public class diagraph {
 		System.out.println(rowsum[i] + "Rowsum " + i);
 		}
 		*/
-		float sum =0;
+		double sum =0;
 		System.out.println("New Diagraph matrix formed after dividing by rowsum");
 		System.out.println(" " + hm.keySet());
 		for (int i =0; i<26;i++)
 		{
 			for(int j=0; j<26;j++)
 			{
-				System.out.print("  " + (float) (diagraph[i][j] + 5) / rowsum[i]);
-				sum = sum + (float) (diagraph[i][j] + 5) / rowsum[i];
+			//	System.out.print("  " + (float) (diagraph[i][j] + 5) / rowsum[i]);
+				sum = sum + (double) (diagraph[i][j] + 5) / rowsum[i];
+				diagraph[i][j] = (diagraph[i][j] + 5) / rowsum[i];
+				
 			}
 			System.out.print(" Sum " + sum);
 			System.out.print("\n");
