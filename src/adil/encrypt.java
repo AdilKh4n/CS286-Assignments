@@ -58,7 +58,7 @@ String s1="abcdefghijklmnopqrstuvwxyz";
 		double oldLogProb, logProb;
 		logProb = 0;
 		oldLogProb = -999999999;
-		int threshold = 0;
+		double threshold = 0.0;
 
 		System.out.println("Enter Minimum Number of re-estimation iteration");
 		minIters = sc.nextInt();
@@ -105,10 +105,6 @@ String s1="abcdefghijklmnopqrstuvwxyz";
 			System.out.print(e + "exception here \n");
 		}
 		
-		//for(int i=0; i<mes.length ;i++)
-	//	{
-//			System.out.println(mes[i]);
-	//	}
 		
 		
 		for(int i=0;i<mes.length;i++)
@@ -129,14 +125,14 @@ String s1="abcdefghijklmnopqrstuvwxyz";
 			System.out.print(mes[i]);
 		}
 		System.out.print("\n");
-		
+	
 	T = maincount;
 	int M = 27, N = 2;
 	double A[][] = new double[][] { { 0.52, 0.48 }, { 0.41571, 0.58429 }};
 	double B[][] = new double[N][M];
 	double pi[] = new double[] { 0.00000, 1.00000};
 	double oldlogProb = -999999999;
-	double iters = 0;
+	int iters = 0;
 
 	// System.out.println(count);
 	int O[] = new int[T];
@@ -179,9 +175,9 @@ String s1="abcdefghijklmnopqrstuvwxyz";
 	}
 
 	//System.out.println(T);
-
+	iters = 0;
 	double c[] = new double[T];
-	while (iters < minIters || Math.abs(logProb - oldLogProb) > threshold) {
+	while (iters < minIters && Math.abs(logProb - oldLogProb) > threshold) {
 		// compute alpha[0][i]
 
 		oldLogProb = logProb;
@@ -320,6 +316,7 @@ String s1="abcdefghijklmnopqrstuvwxyz";
 		// if(iteration%100==0)
 		// System.out.println("PASS "+iteration+ "= "+ logProb);
 		iters = iters + 1;
+		//System.out.println(iters);
 	}
 	System.out.println("A Matrix Sum: ");
 	System.out.print(A[0][0] + A[0][1]);

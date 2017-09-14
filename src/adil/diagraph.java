@@ -17,7 +17,7 @@ public class diagraph {
 		int maincount = 0;
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter Maximum Number of characters");
+		System.out.println("Enter Number of characters");
 		maxchar = sc.nextInt();
 		char mes[] = new char[maxchar + 1];
 		
@@ -64,11 +64,6 @@ public class diagraph {
 		
 		HashMap hm = new HashMap<Character,Integer>();
 		
-	/*	for(int i=0; i<mes.length ;i++)
-		{
-			System.out.print(mes[i]);
-		}
-		System.out.print("\n");*/
 		
 		int alphabet = 97;
 		
@@ -82,17 +77,14 @@ public class diagraph {
 		System.out.println(hm.values());
 		
 		
-		//System.out.println(hm.get(mes[4])))
-		
-		//double diagraph[][] = new double[26][26];
-		
 		
 		for(int i=0; i<mes.length-1;i++)
 		{
 			diagraph[(int) hm.get(mes[i])][(int) hm.get(mes[i+1])] = diagraph[(int) hm.get(mes[i])][(int) hm.get(mes[i+1])] + 1;
 		}
 		
-		System.out.println("Diagraph matrix");
+		/*
+		System.out.println("Initial Diagraph matrix");
 		System.out.println(" " + hm.keySet());
 		for (int i =0; i<26;i++)
 		{
@@ -102,19 +94,9 @@ public class diagraph {
 			}
 			System.out.print("\n");
 		}
+		*/
 		
-		
-		System.out.println("New Diagraph matrix");
-		System.out.println(" " + hm.keySet());
-		for (int i =0; i<26;i++)
-		{
-			for(int j=0; j<26;j++)
-			{
-				System.out.print("  " + (diagraph[i][j] + 5));
-			}
-			System.out.print("\n");
-		}
-		
+		//System.out.println("Calculating rowsum");
 		double rowsum[] = new double[26];
 		
 		for (int i =0; i<26;i++)
@@ -126,24 +108,20 @@ public class diagraph {
 
 		}
 		
-	/*	for(int i=0;i<26;i++)
-		{
-		System.out.println(rowsum[i] + "Rowsum " + i);
-		}
-		*/
+	
 		double sum =0;
 		System.out.println("New Diagraph matrix formed after dividing by rowsum");
-		System.out.println(" " + hm.keySet());
+		//System.out.println(" " + hm.keySet());
 		for (int i =0; i<26;i++)
 		{
 			for(int j=0; j<26;j++)
 			{
-			//	System.out.print("  " + (float) (diagraph[i][j] + 5) / rowsum[i]);
+				System.out.print("  " + (float) (diagraph[i][j] + 5) / rowsum[i]);
 				sum = sum + (double) (diagraph[i][j] + 5) / rowsum[i];
 				diagraph[i][j] = (diagraph[i][j] + 5) / rowsum[i];
 				
 			}
-			System.out.print(" Sum " + sum);
+		//	System.out.print(" Sum " + sum);
 			System.out.print("\n");
 			sum = 0;
 		}

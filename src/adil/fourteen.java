@@ -3,17 +3,14 @@ package adil;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class elevend {
+public class fourteen {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
 		Scanner input = new Scanner(System.in);
 		int maxchar, T;
 		
@@ -25,7 +22,7 @@ public class elevend {
 		logProb = 0;
 		oldLogProb = -999999999;
 
-		System.out.println("Enter Number of characters to be encrypted");
+		System.out.println("Enter Maximum Number of characters");
 		maxchar = input.nextInt();
 		
 		System.out.println("Enter the shift factor");
@@ -33,7 +30,11 @@ public class elevend {
 
 		char mes[] = new char[maxchar + 1];
 		
-	
+		
+		//System.out.println("Enter seed:");
+		//seed = input.nextInt();
+
+		
 
 		try {
 
@@ -156,7 +157,10 @@ public class elevend {
 				System.out.print(e);
 				
 			}
-		
+			
+			System.out.println("length of diagraph" + mes1.length);
+			System.out.println("length of encrypted text" + mes.length);
+			
 			HashMap hm = new HashMap<Character,Integer>();
 			
 			
@@ -168,8 +172,8 @@ public class elevend {
 				alphabet ++;
 			}
 			
-			//System.out.println(hm.keySet());
-			//System.out.println(hm.values());
+			System.out.println(hm.keySet());
+			System.out.println(hm.values());
 			
 			double diagraph[][] = new double[26][26];
 			
@@ -179,7 +183,28 @@ public class elevend {
 				diagraph[(int) hm.get(mes1[i])][(int) hm.get(mes1[i+1])] = diagraph[(int) hm.get(mes1[i])][(int) hm.get(mes1[i+1])] + 1;
 			}
 			
+			System.out.println("Diagraph matrix");
+			System.out.println(" " + hm.keySet());
+			for (int i =0; i<26;i++)
+			{
+				for(int j=0; j<26;j++)
+				{
+					System.out.print("  "+ diagraph[i][j]);
+				}
+				System.out.print("\n");
+			}
 			
+			
+			System.out.println("New Diagraph matrix");
+			System.out.println(" " + hm.keySet());
+			for (int i =0; i<26;i++)
+			{
+				for(int j=0; j<26;j++)
+				{
+					System.out.print("  " + (diagraph[i][j] + 5));
+				}
+				System.out.print("\n");
+			}
 			
 			double rowsum[] = new double[26];
 			
@@ -210,14 +235,20 @@ public class elevend {
 				sum = 0.0;
 			}
 
-			T = 1000;
+			T = 300;
 			int O[] = new int[T];
-			for (int i = 0; i < 1000; i++) {
+			for (int i = 0; i < 300; i++) {
 				if (mes[i] >= 'a' && mes[i] <= 'z')
 					O[i] = (int) mes[i] - 97;
 				
 			}
 			
+			System.out.println("Enter number of iterations");
+			int usvalue = input.nextInt();
+			
+			float[] arr = new float[usvalue];
+			while (n < usvalue)
+			{
 			double B[][]= new double[26][26];  
 			Random rm = new Random();
 			//System.out.println(rm.nextInt(100) + 1);
@@ -230,6 +261,14 @@ public class elevend {
 				}
 			}
 			
+			/*for(int i=0; i < 26;i++)
+			{
+				for(int j=0; j<26; j++)
+				{
+					System.out.print(B[i][j] + " ");
+				}
+				System.out.println();
+			}*/
 			
 			double rowsum1[] = new double[26];
 			
@@ -243,7 +282,7 @@ public class elevend {
 			
 			Double sum1 = 0.0;
 			System.out.println("B Matrix: ");
-	
+		//	System.out.println(" " + hm.keySet());
 			for (int i =0; i<26;i++)
 			{
 				for(int j=0; j<26;j++)
@@ -252,7 +291,7 @@ public class elevend {
 					sum1 = sum1 + (double) (B[i][j] + 5) / rowsum1[i];
 					B[i][j] = (double) (B[i][j] + 5) / rowsum1[i];				
 				}
-			//	System.out.print(" Sum " + sum1);
+				System.out.print(" Sum " + sum1);
 				System.out.print("\n");
 				sum1 = 0.0;
 			}
@@ -274,9 +313,12 @@ public class elevend {
 					sum2 = sum2 + pi[i] / rowsum2;
 					pi[i] =  pi[i] / rowsum2;
 			}
-			//	System.out.print(" Sum " + sum2);
+				System.out.print(" Sum " + sum2);
 				System.out.print("\n");
-	
+			//	System.out.print(maincount1);
+			
+				
+				
 				
 				
 				double alpha[][] = new double[T][N];
@@ -293,7 +335,7 @@ public class elevend {
 				int iters = 0;
 				logProb = 0;
 				double threshold = 0.001;
-				while ( iters < 200 && Math.abs(logProb - oldLogProb) > threshold   ) 
+				while ( iters < 200 || Math.abs(logProb - oldLogProb) > threshold   ) 
 				{
 					// compute alpha[0][i]
 					
@@ -431,9 +473,14 @@ public class elevend {
 					}
 					logProb = -logProb;
 
-				iters=iters+1;
+					//System.out.println(iters + "Chutiya ho gaya main" + " " + Math.abs(logProb - oldLogProb));
+					// Calculating if required to iterate
+
+					// if(iteration%100==0)
+					// System.out.println("PASS "+iteration+ "= "+ logProb);
+					iters=iters+1;
 				}
-				
+
 				System.out.println("\n\nB Matrix");
 				int alphabets = 97;
 				for (int i = 0; i < M; i++) 
@@ -477,10 +524,10 @@ public class elevend {
 					{
 						if(B[i][j] >maxval)
 						{
-						//	System.out.println("j"+ j + "i" +i + "k" + k + (float) B[i][j]);
+				//			System.out.println("j"+ j + "i" +i + "k" + k + (float) B[i][j]);
 							maxval = B[i][j];
 							max[k] = j;
-							//System.out.println("Max of column "+i + " " + B[i][j]);
+					//		System.out.println("Max of column "+i + " " + B[i][j]);
 						}
 					}
 					maxval = 0;
@@ -509,13 +556,26 @@ public class elevend {
 						p++;
 				}
 				
-
-				System.out.println("Final putative score: " + (float) puta / 26 * 100);
-		
+			//]	int tot = puta + equals;
+				System.out.println("putative score for run " + n + ": " + (float) puta / 26 * 100);
+				arr[n] = (float)puta / 26 * 100 ;
+				n = n + 1;
+			}
 			
+			float maxx = 0 ;
+			for (int i = 0; i< arr.length; i++)
+			{
+				if(arr[i] > maxx)
+				{
+					maxx = arr[i];
+				}
+			}
+			
+			System.out.println("Final Max putative score: " + maxx);
 			input.close();
 			
 
+	
 	}
 
 }
