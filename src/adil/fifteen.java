@@ -1,9 +1,12 @@
 package adil;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -12,10 +15,12 @@ public class fifteen {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-
+		int M = 54, N = 26;
 Scanner input = new Scanner(System.in);
 int maxchar,T;
 int maincount1 = 0;
+float[][] Bans = new float[M][N];
+
 
 double oldLogProb, logProb;
 int minIters = 0;
@@ -29,7 +34,7 @@ oldLogProb = -999999999;
 //seed = input.nextInt();
 
 //T = maincount;
-int M = 54, N = 26;
+
 //double A[][] = new double[][] { { 0.25596, 0.74404 }, { 0.71571, 0.28429 }};
 //double B[][] = new double[N][M];
 //double pi[] = new double[] { 0.00000, 1.00000};
@@ -38,7 +43,7 @@ double oldlogProb = -999999999;
 
 
 	
-	
+	/*
 	//System.out.println("give 100000 value");
 //		Scanner sc = new Scanner(System.in);
 //	int diagraphc = input.nextInt();
@@ -160,7 +165,7 @@ int diagraphc = 1000000;
 		sum = 0.0;
 	}
 	
-	
+	*/
 	int O[] =new int[]
 			{1,2,3,4,5,4,6,7,2,8,9,10,11,12,13,11,7,14,15,16,17,18,19,20,21,1,22,3,23,24,25,26,19,17,
 27,28,19,29,6,30,8,31,26,32,33,34,35,19,36,37,38,39,40,4,1,2,7,3,9,10,41,6,2,42,10,43,26,44,
@@ -180,9 +185,107 @@ int diagraphc = 1000000;
 	int usvalue = input.nextInt();
 	
 	float[] arr = new float[usvalue];
+	Double[] putative = new Double[usvalue];
+	
 	int n = 0;
 	while (n < usvalue)
 	{
+		int diagraphc = 1000000;
+		char mes1[] = new char[diagraphc + 1];
+		
+		
+		try {
+
+			BufferedReader reader1 = new BufferedReader(
+					new InputStreamReader(new FileInputStream("/Users/adilkhan/Downloads/BrownCorpus")));
+			char temp1[] = new char[diagraphc + 1];
+			
+			
+			int T1 = 0;
+			int count1 = 0;
+			maincount1 = 0;
+			String line1 = new String();
+			while ((line1 = reader1.readLine()) != null) {
+				line1 = line1.toLowerCase();
+				temp1 = line1.toCharArray();
+				count1++;
+				int length2 = temp1.length;
+				int startpo = 15;
+				while (temp1[startpo] == ' ') {
+					startpo++;
+				}
+				for (int i = startpo; i < length2; i++) {
+
+					if (temp1[i] >= 'a' && temp1[i] <= 'z') {
+						mes1[maincount1] = temp1[i];
+						maincount1++;
+					}
+					if (maincount1 > diagraphc)
+						break;
+
+				}
+				if (maincount1 > diagraphc)
+					break;
+			}
+			reader1.close();
+		} 
+		catch (Exception e) {
+			System.out.print(e);
+			
+		}
+		
+		HashMap hm = new HashMap<Character,Integer>();
+		
+		
+		int alphabet = 97;
+		
+		for (int i = 0; i < 26;i ++)
+		{
+			hm.put((char) alphabet,i);
+			alphabet ++;
+		}
+		
+		System.out.println(hm.keySet());
+		System.out.println(hm.values());
+		
+		double diagraph[][] = new double[26][26];
+		
+		
+		for(int i=0; i < mes1.length - 1;i++)
+		{
+			diagraph[(int) hm.get(mes1[i])][(int) hm.get(mes1[i+1])] = diagraph[(int) hm.get(mes1[i])][(int) hm.get(mes1[i+1])] + 1;
+		}
+		
+		
+		double rowsum[] = new double[26];
+		
+		for (int i =0; i<26;i++)
+		{
+			for(int j=0; j<26;j++)
+			{
+				rowsum[i] =  rowsum[i] + (diagraph[i][j] + 5);
+			}
+
+		}
+		
+
+		
+		double sum =0;
+		System.out.println("New Diagraph matrix - A Matrix:");
+		System.out.println(" " + hm.keySet());
+		for (int i =0; i<26;i++)
+		{
+			for(int j=0; j<26;j++)
+			{
+				System.out.print("  " + (float) (diagraph[i][j] + 5) / rowsum[i]);
+				sum = sum + (double) (diagraph[i][j] + 5) / rowsum[i];
+				diagraph[i][j] = (double) (diagraph[i][j] + 5) / rowsum[i];
+			}
+			System.out.print(" Sum " + sum);
+			System.out.print("\n");
+			sum = 0.0;
+		}	
+		
 	double B[][]= new double[26][54];  
 	Random rm = new Random();
 	//System.out.println(rm.nextInt(100) + 1);
@@ -368,7 +471,7 @@ int diagraphc = 1000000;
 			// re-estimate A
 
 			double numer = 0;
-			/*
+			
 			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < N; j++) {
 					numer = 0;
@@ -380,7 +483,7 @@ int diagraphc = 1000000;
 
 					A[i][j] = numer / denom;
 				}
-			}*/
+			}
 
 			// re-estimate B
 
@@ -407,16 +510,18 @@ int diagraphc = 1000000;
 			}
 			logProb = -logProb;
 
-			System.out.println(iters + Math.abs(logProb - oldLogProb));
+			//System.out.println(iters + Math.abs(logProb - oldLogProb));
 			// Calculating if required to iterate
 
 			// if(iteration%100==0)
 			// System.out.println("PASS "+iteration+ "= "+ logProb);
 			iters=iters+1;
+			
 		}
 
 		System.out.println("\n\nB Matrix");
 		int alphabets = 97;
+		//float[][] Bans = new float[M][N];
 		for (int i = 0; i < M; i++) 
 		{
 			//System.out.print((char) alphabets);
@@ -424,6 +529,7 @@ int diagraphc = 1000000;
 			alphabets++;
 			for (int j = 0; j < N; j++) 
 			{
+				Bans[i][j] = (float) B[j][i];
 				System.out.printf("%f", B[j][i]);
 				System.out.print("\t");
 			}
@@ -458,10 +564,10 @@ int diagraphc = 1000000;
 			{
 				if(B[i][j] >maxval)
 				{
-					System.out.println("j"+ j + "i" +i + "k" + k + (float) B[i][j]);
+					//System.out.println("j"+ j + "i" +i + "k" + k + (float) B[i][j]);
 					maxval = B[i][j];
 					max[k] = j;
-					System.out.println("Max of column "+i + " " + B[i][j]);
+					//System.out.println("Max of column "+i + " " + B[i][j]);
 				}
 			}
 			maxval = 0;
@@ -489,7 +595,7 @@ int diagraphc = 1000000;
 				}
 				p++;
 		}
-			System.out.println("putative score for run " + n + ": " + (float) puta / 26 * 100);
+			/*System.out.println("putative score for run " + n + ": " + (float) puta / 26 * 100);
 	arr[n] = (float)puta / 26 * 100 ;
 	n = n + 1;
 }
@@ -504,9 +610,134 @@ for (int i = 0; i< arr.length; i++)
 }
 
 System.out.println("Final Max putative score: " + maxx);
+input.close();*/
+
+String line;
+LinkedHashMap<Integer, Character> hmap=new LinkedHashMap<>();
+int mes[]=new int[408];
+try
+{
+	
+	File file=new File("/Users/adilkhan/Documents/CS Fall 16/CS286/Z408.txt");
+    BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+    char tempz[]= new char[1000];
+    String linez=new String();
+    int countz=0,tt=0;
+    while((line=reader.readLine())!=null)
+    {
+    	 Scanner scanner = new Scanner(line);
+    	 while (scanner.hasNextInt()) {
+    		 mes[tt]=(scanner.nextInt());tt++;
+    	    }
+    }
+//    for(int i=0;i<tt;i++)
+//    	System.out.println(mes[i]);
+}
+catch(Exception e)
+{
+	System.out.print(e);
+	
+}
+
+
+
+char mess1[]=new char[408];
+
+try
+{
+	File file=new File("/Users/adilkhan/Documents/CS Fall 16/CS286/decoded.txt");
+    BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+    char tempz[]= new char[408];
+    String linez=new String();
+    int countz=0;
+    char[] temp;
+    int count = 0;
+    while((line=reader.readLine())!=null)
+    {
+    	line=line.toLowerCase();
+    	temp=line.toCharArray();
+    	int length1=temp.length;
+    	
+    	for(int i=0;i<length1;i++)
+    	{
+
+    			if(temp[i]>='a'&& temp[i]<='z')
+    				{
+    					mess1[count]=temp[i];
+    					count++;
+    				}
+    			if(count>407)
+					break;
+    	}
+    	if(count>407)
+			break;
+    }
+    
+}
+catch(Exception e)
+{
+	System.out.print(e);
+}
+
+
+
+for(int i=0;i<408;i++)
+{
+	hmap.put(mes[i], mess1[i]);
+}
+//System.out.println("Hmap is" + Arrays.asList(hmap)); // method 1
+	
+	double maxval1=0.0,maxindex=0.0;
+	double key[]= new double[30];
+	int kl=0;
+	for(int i=0;i<N;i++)
+	{
+		for(int j=0;j<M;j++)
+		{
+			
+					if(Bans[j][i] > maxval1)
+					{
+						
+						maxindex=j;
+						
+						maxval1=Bans[j][i];
+					}
+
+			}
+		key[kl]=maxindex;
+		kl++;
+		maxindex=0;
+		maxval=0;
+	}
+	
+	System.out.print("\n\n");
+	int ans = 0;
+	for(int i=1 ; i<key.length;i++)
+	{
+		//char temp1=(char) (97+i);
+		//System.out.print(hmap.get(i));
+		//System.out.print(" ");
+		if(hmap.get(i) == key[i])
+		{
+			ans= ans+1;
+		}
+	}
+	System.out.println("Putative value is : ");
+	System.out.print((ans/26)*100);
+	putative[n]= (double) ((ans/26)*100);
+	n = n + 1;
+	}
+//end of maxn while
+double maxput=0.0;
+for(int i=0;i<n;i++)
+{
+if(putative[i]>maxput)
+	maxput=putative[i];
+}
+System.out.println("\n\nMaximum putative value is: ");
+System.out.print(maxput);
+
 input.close();
-
-
 	}
 
 }
