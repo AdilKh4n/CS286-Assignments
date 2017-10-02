@@ -47,7 +47,7 @@ public class Assign4_3 {
 			}
 		}
 		
-		System.out.print(lst.toString() + "\n");
+		//System.out.print(lst.toString() + "\n");
 		
 		int count = 0;
 		int k = 1, l = 0;
@@ -62,7 +62,7 @@ public class Assign4_3 {
 			{
 				count = count + 1;
 			}
-			System.out.print(c);
+		//	System.out.print(c);
 			
 			if(hm.containsKey(c))
 			{
@@ -84,11 +84,13 @@ public class Assign4_3 {
 			
 		}
 			litr=lst.listIterator();
-			System.out.print(" count : " + count );
+			//ystem.out.print(" Number of gaps : " + count +"\n");
+			
+			
 			if (count > 5)
 			{
-				System.out.print(" This is an insert state I" + (k=k-1) +"\n");
-				System.out.println("Emission Probabilities for Column" + i + ":");
+				System.out.println("Column " + i + " is an insert state |I" + (k=k-1) +"|\n");
+				System.out.println("Emission Probabilities for Column " + i + ":");
 				System.out.print("EI"+k+"");
 				
 				 while(litr.hasNext()){
@@ -107,8 +109,8 @@ public class Assign4_3 {
 			}
 			else
 			{
-				System.out.print(" This is a match state M" + k +"\n");
-				System.out.println("Emission Probabilities for Column" + i + ":");
+				System.out.print("Column " + i + " is a match state |M" + k +"|\n");
+				System.out.println("Emission Probabilities for Column " + i + ":");
 			//	System.out.print("EM"+(k)+"");
 				
 				
@@ -127,14 +129,37 @@ public class Assign4_3 {
 				k = k + 1;
 			}
 		//	System.out.print(" Total div: " + (10-count) +"\n");
-			System.out.println(hm.keySet());
-			System.out.println(hm.entrySet());
+		//	System.out.println(hm.keySet());
+		//	System.out.println(hm.entrySet());
 			
 			//System.out.print("EM"+(k-1)+"");
 			
 			hm.clear();
 			count = 0;
 			System.out.println();
+			
+/* 
+Emission Probabilities for last two columns:
+I49 A = 1/23
+I49 B = 5/23
+I49 C = 1/23
+I49 D = 1/23
+I49 E = 1/23
+I49 F = 4/23
+I49 L = 1/23
+I49 M = 2/23
+I49 N = 1/23
+I49 P = 1/23
+I49 0 = 1/23
+I49 Q = 1/23
+I49 1 = 1/23
+I49 R = 1/23
+I49 2 = 1/23
+I49 S = 1/23
+I49 T = 1/23
+I49 4 = 1/23
+I49 Y = 1/23
+			 */
 		}
 		
 	

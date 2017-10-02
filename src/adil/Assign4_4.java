@@ -13,7 +13,7 @@ public class Assign4_4 {
 		int X[] = new int[]{0,3,1};
 		int Y[] = new int[]{1,0,0,2,1};
 		 //int Y[] = new int[]{2,1,3,0,0};
-		 //int X[] = new int[]{3,3,1,0,2,2,1};
+		// int X[] = new int[]{3,3,1,0,2,2,1};
 		 
 		int n = X.length;
 		int m = Y.length;
@@ -25,16 +25,11 @@ public class Assign4_4 {
 		 {
 			for(int j=0;j<m+1;j++)
 			{
-				G[0][j]=j;
-		 
-		 for(int k=1;k<=j;k++)
-		 {
-			 sum = sum + (-3*k);
-			 F[0][j] = sum;
-		 }
-		 sum=0;
-		 
-		   }
+				G[0][j] = j;
+				F[0][j] = -3 * j;
+	    	}
+			F[i][0] = -3 * i;
+			
 		 }
 		
 		 System.out.println("G Matrix :");
@@ -74,11 +69,11 @@ public class Assign4_4 {
 				 }
 				 else if(F[i][j] == b)
 				 {
-					 G[i][j] = G[i-1][j] + 1;
+					 G[i][j] = (G[i-1][j] + 1);
 				 }
 				 else
 				 {
-					 G[i][j] = G[i][j-1] + 1;
+					 G[i][j] = (G[i][j-1] + 1);
 				 }
 			 }
 		 }
