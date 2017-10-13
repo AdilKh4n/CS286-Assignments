@@ -3,7 +3,7 @@ package adil;
 import java.util .*;
 import java.io.*;
 
-public class ninth
+public class FiveNinth
 {
 
  public static void main(String args[])

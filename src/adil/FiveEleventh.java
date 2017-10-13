@@ -77,7 +77,10 @@ public class FiveEleventh {
 			System.out.println();
 		}
 		
-		double Y[] = {1,5,1,5,5,1,1,3};
+		//double Y[] = {1,5,1,5,5,1,1,3};
+		double Y[] = {-2,3,2,3,0,2,-1,1};
+		//double Y[] = {2,-3,2,3,0,0,2,-1};
+		//double Y[] = {2,-2,2,2,-1,1,2,2};
 		double Y1[] = new double[Y.length];
 		
 		for(int i=0; i<Y.length; i++)

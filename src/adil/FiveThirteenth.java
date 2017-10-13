@@ -1,16 +1,18 @@
 package adil;
 
-public class FiveTenth {
+public class FiveThirteenth {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		 
-		//double Y[] = {2,3,1,0,3,2};
-		// double Y[] = {2,3,4,4,-3,-2};
-		// double Y[] = {-4,-5,0,3,1,-2};
-		// double Y[] = {2,3,0,1,3,2};
-		 double Y[] = {3,2,1,0,3,2};
+		
+		 double delta[][] = {{-1.1069,1.2794, -2.68,2.5076},
+	 			 {1.5480,0.5484,-1.2085,-0.8879}};
+		 //double Y[] = {1,-1,1,-1,-1,1};
+		 //double Y[] = {-2,2,2,-1,-2,2};
+		 //double Y[] = {1,3,0,1,3,1};
+		 //double Y[] = {2,3,1,1,-2,0};
+		 double Y[] = {-1,2,1,2,-1,0};
 		 double u[] = {1.75,1.75,1.25,2,2,1};
+
 		 double Y1[] = new double[Y.length];
 		 
 		 for(int i=0; i<Y.length; i++)
@@ -18,8 +20,12 @@ public class FiveTenth {
 			 Y1[i] = Y[i] - u[i];
 		 }
 		 
-		 double u12[][] = {{0.1641,0.6278,-0.2604,-0.5389,0.4637,0.0752},
-		{0.2443,0.1070,-0.8017,0.4277,-0.1373,-0.2904}};
+		 double U[][]={{0.1641 , 0.2443},
+					{0.6278 ,  0.1070  }, 
+					{-0.2604 ,  -0.8017 },
+					{-0.5389 , 0.4277 },
+					{0.4637, -0.1373 },  
+					{0.0752,  -0.2904}};
 		 
 		 double W[] = new double[2];
 		 
@@ -27,18 +33,15 @@ public class FiveTenth {
 		 {	 
 			 for(int j=0 ;j<Y1.length; j++)
 			 {
-				 W[i] += Y1[j] * u12[i][j]; 
+				 W[i] += Y1[j] * U[j][i]; 
 			 }
 		 }
 		
+		 System.out.println("W Matrix:");
 		 for(int j=0 ;j<2; j++)
 		 {
 			 System.out.println(W[j]);
 		 }
-		
-		 
-		 double delta[][] = {{-1.1069,1.2794, -2.68,2.5076},
-				 			 {1.5480,0.5484,-1.2085,-0.8879}};
 		 
 		 double E[] = new double[4];
 		 
@@ -69,5 +72,7 @@ public class FiveTenth {
 		 }
 		 
 		 System.out.printf("PCA Score of the sequence : %f",least);
+		
 	}
+
 }
