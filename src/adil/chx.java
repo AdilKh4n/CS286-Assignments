@@ -16,6 +16,8 @@ public class chx {
 	
 public static void main(String[] args)
 	{
+		String a = "leetcode";
+		System.out.println(a.indexOf("lee"));
 		Random rm = new Random();
 		System.out.println(rm.nextInt(100) + 1);
 		double B[][]= new double[26][26];  
